@@ -10,6 +10,7 @@ class Scrap extends Model
     use HasFactory;
 
     protected $fillable = [
+        'source',
         'category',
         'name',
         'url',

@@ -17,6 +17,7 @@ class ScrapFactory extends Factory
     public function definition(): array
     {
         return [
+            'source' => 'Test Source',
             'category' => 'Test Category',
             'name' => 'Test Item Name',
             'url' => $this->faker->url.'.test',

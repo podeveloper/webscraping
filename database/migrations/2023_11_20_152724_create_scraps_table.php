@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('scraps', function (Blueprint $table) {
             $table->id();
+            $table->string('source')->nullable();
             $table->string('category')->nullable();
             $table->string('name')->nullable();
             $table->string('url')->nullable();
