@@ -149,16 +149,24 @@ class zorgkaartnederland extends Command
 
     protected function getLastProcessedCategory()
     {
-        return 'https://www.zorgkaartnederland.nl/'.Scrap::latest()->first()?->category;
+        return Scrap::latest()->first()?->category;
     }
 
     protected function getProcessedCategories()
     {
-        // Retrieve processed categories from the database excluding the last processed category
-        return DB::table('scraps')
-            ->where('category', '<>', $this->getLastProcessedCategory())
+        $categories = DB::table('scraps')
             ->distinct()
             ->pluck('category')
             ->toArray();
+
+        $latestCategory = $this->getLastProcessedCategory();
+
+        $index = array_search($latestCategory, $categories);
+
+        if ($index !== false) {
+            unset($categories[$index]);
+        }
+
+        return $categories;
     }
 }
